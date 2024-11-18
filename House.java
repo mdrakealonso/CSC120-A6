@@ -17,7 +17,7 @@ public class House extends Building {
    * @param residents residents living in a House
    * @param hasDiningRoom whether or not a House has a dining room
    */
-  public House(String name, String address, int nFloors, ArrayList<String> residents, boolean hasDiningRoom){
+  public House(String name, String address, int nFloors, boolean hasDiningRoom){
     super(name, address, nFloors);
     this.residents = new ArrayList<String>();
     this.hasDiningRoom = hasDiningRoom;
@@ -55,10 +55,9 @@ public class House extends Building {
    */
   public void moveIn(String name) {
     if (isResident(name)) {
-      System.out.println(name + " is already living at this address.");
-    } else {
-      residents.add(name);
+      throw new RuntimeException(name + " is already living at this address.");
     }
+    residents.add(name);
   }
 
   /**
@@ -67,15 +66,15 @@ public class House extends Building {
    */
   public String moveOut(String name) {
     if (!isResident(name)) {
-      System.out.println(name + " is not living at this address.");
-    } else {
-      residents.remove(name);
+      throw new RuntimeException(name + " is not living at this address.");
     }
+    residents.remove(name);
     return(name);
   }
 
   /**
      * Returns a String representing a House with building and resident details.
+     * @return a String representing a House
      */
   public String toString() {
     String diningRoom = "";
@@ -92,7 +91,7 @@ public class House extends Building {
      * @param args an empty Array of Strings for storing command line arguments
      */
   public static void main(String[] args) {
-    House someHouse = new House("Harry's House", "12 Grimmauld Place", 3, new ArrayList<>(), true);
+    House someHouse = new House("Harry's House", "12 Grimmauld Place", 3, true);
     System.out.println(someHouse);
     someHouse.moveIn("Mavis");
     System.out.println(someHouse);

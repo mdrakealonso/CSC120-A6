@@ -48,10 +48,9 @@ public class Library extends Building {
    */
   public void addTitle(String title) {
     if (containsTitle(title)) {
-      System.out.println(title + " is already in the library's collection.");
-    } else {
-      collection.put(title, true);
+      throw new RuntimeException(title + " is already in the library's collection.");
     }
+    collection.put(title, true);
   }
 
   /**
@@ -74,10 +73,9 @@ public class Library extends Building {
    */
   public void checkOut(String title) {
     if (!isAvailable(title)) {
-      System.out.println(title + " isn't available.");
-    } else {
-      collection.replace(title, true, false);
+      throw new RuntimeException(title + " isn't available.");
     }
+    collection.replace(title, true, false);
   }
 
   /**
@@ -87,10 +85,9 @@ public class Library extends Building {
    */
   public void returnBook(String title) {
     if (isAvailable(title)) {
-      System.out.println(title + " has already been returned.");
-    } else {
-      collection.replace(title, false, true);
+      throw new RuntimeException(title + " has already been returned.");
     }
+    collection.replace(title, false, true);
   }
 
   /**
